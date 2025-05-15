@@ -1,10 +1,11 @@
+import type React from "react";
 import "./Home.css";
 import pizzaImg from "../assets/pizza.png";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const mainTitle: string = "ZABARI’S PIZZA";
   const bodyContent: string =
