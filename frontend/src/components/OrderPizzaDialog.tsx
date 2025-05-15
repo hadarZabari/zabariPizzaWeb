@@ -44,6 +44,7 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
 
     useEffect(() => {
     if(pizzaOnEdit){
+        console.log(pizzaOnEdit)
      setPizzaSize(pizzaOnEdit?.size)
      setPizzaExtras(pizzaOnEdit.extras)
         setIdPizza(pizzaOnEdit.id)

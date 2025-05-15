@@ -16,10 +16,10 @@ import { useTheme } from "@mui/material/styles";
 import OrderPizzaDialog from "./OrderPizzaDialog";
 import { v4 as uuidv4 } from "uuid";
 export type PizzaDetails = {
-    size: keyof typeof availablePizzaSizes;
-    extras: Extras;
-    id: string;
-  }
+  size: keyof typeof availablePizzaSizes;
+  extras: Extras;
+  id: string;
+};
 type UserOrder = {
   name: string;
   pizzas: PizzaDetails[];
@@ -32,7 +32,7 @@ const OrderSection: React.FC = () => {
     name: "",
     pizzas: [],
   });
-  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaDetails | null>(null)
+  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaDetails | null>(null);
   const dialogRef = useRef<OrderPizzaDialogRef>(null);
 
   const handleBlur = (
@@ -52,13 +52,12 @@ const OrderSection: React.FC = () => {
     id?: string
   ) => {
     if (id) {
-     
       const updated = userOrder.pizzas.map(({ id: existId, extras, size }) =>
         existId === id
           ? { id, extras: newExtras, size: newSize }
-          : { id, extras, size }
+          : { id: existId, extras, size }
       );
- 
+
       setUserOrder((prev) => ({ ...prev, pizzas: updated }));
     } else {
       setUserOrder((prev) => ({
@@ -90,36 +89,49 @@ const OrderSection: React.FC = () => {
         </Grid>
       </Grid>
       {userOrder.pizzas.length ? (
-        <Stack spacing={2}>
+        <Stack spacing={2} width={600} height={250}>
           {userOrder.pizzas.map(({ extras, id, size }, index) => (
-            <Stack
+            <Grid
               key={index}
-              direction="row"
-              spacing={4}
               alignItems="center"
               bgcolor={theme.palette.secondary.main}
+              container
             >
-              <Typography variant="body1">
-                <strong>Size:</strong> {size}
-              </Typography>
-              <Typography variant="body1">
-                <strong>Extras:</strong>{" "}
-                {Object.keys(extras)
-                  .filter((key) => extras[key as keyof Extras])
-                  .join(", ")}
-              </Typography>
-              <Button onClick={() => {
-                setPizzaOnEdit({id, extras, size})
-                handleOpen()
-              }}>Edit</Button>
-            </Stack>
+              <Grid size={3}>
+                <Typography variant="body1">
+                  <strong>Size:</strong> {size}
+                </Typography>
+              </Grid>
+              <Grid size={7}>
+                <Typography variant="body1">
+                  <strong>Extras:</strong>
+                  {Object.keys(extras)
+                    .filter((key) => extras[key as keyof Extras])
+                    .join(", ")}
+                </Typography>
+              </Grid>
+              <Grid size={2}>
+                <Button
+                  onClick={() => {
+                    setPizzaOnEdit({ id, extras, size });
+                    handleOpen();
+                  }}
+                >
+                  Edit
+                </Button>
+              </Grid>
+            </Grid>
           ))}
         </Stack>
       ) : (
         <Typography>No pizza selected.</Typography>
       )}
 
-      <OrderPizzaDialog ref={dialogRef} onSave={handleSave} pizzaOnEdit={pizzaOnEdit}/>
+      <OrderPizzaDialog
+        ref={dialogRef}
+        onSave={handleSave}
+        pizzaOnEdit={pizzaOnEdit}
+      />
     </Stack>
   );
 };
