@@ -15,6 +15,7 @@ export type PizzaDetails = {
   extras: Extras;
   id: string | undefined;
 };
+
 export type UserOrder = {
   name: string;
   pizzas: PizzaDetails[];

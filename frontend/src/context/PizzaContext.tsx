@@ -58,7 +58,7 @@ const getInitialState = (): State => {
   return stored ? JSON.parse(stored) : initialState;
 };
 
-export const PizzaContext = createContext<PizzaContextType>({
+ const PizzaContext = createContext<PizzaContextType>({
   state: getInitialState(),
   dispatch: () => null,
   defaultExtras: defaultExtras,
@@ -87,7 +87,7 @@ export const PizzaProvider: React.FC<{ children: React.ReactNode }> = ({
 export const usePizzaContext = () => {
   const context = useContext(PizzaContext);
   if (!context) {
-    throw new Error("usePizzaContext must be used within a PizzaProvider");
+    throw new Error("provider is missing");
   }
   return context;
 };
