@@ -1,15 +1,16 @@
 import type React from "react";
 import { useRef, useState } from "react";
 import { Stack, Typography, Grid, Button } from "@mui/material";
-import type { OrderPizzaDialogRef } from "./OrderPizzaDialog";
+import type { OrderPizzaDialogRef } from "./CreateOrder/OrderDialog";
 import { useTheme } from "@mui/material/styles";
 import { usePizzaContext } from "../context/PizzaContext";
 import ViewOrderDialog from "./ViewOrderDialog";
 import type { UserOrderManagment } from "../types/pizzaTypes";
+
 const ManagmentSection: React.FC = () => {
   const mainTitle = "Managment Section";
   const theme = useTheme();
-  const [orderInView, setOrderInView] = useState<UserOrderManagment>({})
+  const [orderInView, setOrderInView] = useState<UserOrderManagment>()
   const dialogRef = useRef<OrderPizzaDialogRef>(null);
   const { state } = usePizzaContext();
   const handleOpen = () => {
@@ -62,7 +63,7 @@ const ManagmentSection: React.FC = () => {
           <Typography>No pending orders.</Typography>
         )}
       </Stack>
-      <ViewOrderDialog ref={dialogRef} orderInView={orderInView} />
+     {orderInView &&  <ViewOrderDialog ref={dialogRef} orderInView={orderInView} />}
     </Stack>
   );
 };

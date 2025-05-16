@@ -5,8 +5,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Home from "./components/Home";
-import OrderSection from "./components/OrderSection";
+import Home from "./components/Home/Home";
+import OrderSection from "./components/CreateOrder/OrderSection";
 import ManagmentSection from "./components/ManagmentSection";
 import ROUTES from "./routes";
 import { PizzaProvider } from "./context/PizzaContext";

@@ -13,7 +13,7 @@ export type PizaSizes = "S" | "M" | "L";
 export type PizzaDetails = {
   size: PizaSizes;
   extras: Extras;
-  id: string;
+  id: string | undefined;
 };
 export type UserOrder = {
   name: string;

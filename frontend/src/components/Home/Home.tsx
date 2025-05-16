@@ -1,9 +1,9 @@
 import type React from "react";
 import "./Home.css";
-import pizzaImg from "../assets/pizza.png";
+import pizzaImg from "../../assets/pizza.png";
+import ROUTES from "../../routes";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../routes";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -12,7 +12,13 @@ const Home: React.FC = () => {
     " We are committed to the best pizza. 100% cheese. Build your pizza by adding a variety of toppings.";
 
   return (
-    <Grid container justifyContent="center" alignItems="center"  spacing={25} height="100%">
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      spacing={25}
+      height="100%"
+    >
       <Grid size={5}>
         <Stack spacing={5}>
           <Stack>

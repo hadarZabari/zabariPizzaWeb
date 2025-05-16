@@ -1,4 +1,8 @@
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from "react";
+import React, {
+  useState,
+  useImperativeHandle,
+  forwardRef
+} from "react";
 import {
   Dialog,
   DialogTitle,
@@ -14,57 +18,51 @@ import {
   Checkbox,
 } from "@mui/material";
 import PizzaAnimation from "./PizzaAnimation";
-import { availablePizzaSizes, defaultExtras, type Extras ,type PizaSizes, type PizzaDetails} from "../types/pizzaTypes";
-export type OrderPizzaDialogRef = {
+import {
+  availablePizzaSizes,
+  defaultExtras,
+  type Extras,
+  type PizaSizes,
+  type PizzaDetails,
+} from "../../types/pizzaTypes";
+
+export type OrderDialogRef = {
   open: () => void;
   close: () => void;
 };
 
-type OrderPizzaDialogProps = {
-    pizzaOnEdit: PizzaDetails | null,
-  onSave: (
-    newSize: PizaSizes,
-    newExtras: Extras,
-    id?: string
-  ) => void;
+type OrderDialogProps = {
+  onSave: () => void;
+  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaDetails>>
+  pizzaOnEdit: PizzaDetails;
+  
 };
 
-const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
-  ({ onSave, pizzaOnEdit }, ref) => {
+const OrderDialog = forwardRef<OrderDialogRef, OrderDialogProps>(
+  ({ onSave, pizzaOnEdit, setPizzaOnEdit }, ref) => {
+
     const [open, setOpen] = useState(false);
-    const [pizzaSize, setPizzaSize] =
-      useState<PizaSizes>("M");
-    const [pizzaExtras, setPizzaExtras] = useState<Extras>(defaultExtras);
-    const [idPizza, setIdPizza] = useState<string | undefined>(undefined)
+
     useImperativeHandle(ref, () => ({
       open: () => setOpen(true),
       close: () => setOpen(false),
     }));
 
-    useEffect(() => {
-    if(pizzaOnEdit){
-        console.log(pizzaOnEdit)
-     setPizzaSize(pizzaOnEdit?.size)
-     setPizzaExtras(pizzaOnEdit.extras)
-        setIdPizza(pizzaOnEdit.id)
-    }
-       
-    }, [pizzaOnEdit])
-    
+
     const handleCheckboxChange = (
       event: React.ChangeEvent<HTMLInputElement>
     ) => {
-      setPizzaExtras((prev) => ({
+      setPizzaOnEdit((prev) => ({
         ...prev,
-        [event.target.name]: event.target.checked,
+        extras: { ...prev.extras, [event.target.name]: event.target.checked },
       }));
     };
 
-      const handleSave = () => {
-        onSave(pizzaSize, pizzaExtras, idPizza)
-        setOpen(false);
-        ResetDialog();
-      };
+    const handleSave = () => {
+      onSave();
+      setOpen(false);
+      ResetDialog();
+    };
 
     const handleCancel = () => {
       setOpen(false);
@@ -72,21 +70,28 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
     };
 
     const ResetDialog = () => {
-      setPizzaExtras(defaultExtras);
-      setPizzaSize("M");
-      setIdPizza(undefined)
+      setPizzaOnEdit({
+        extras: defaultExtras,
+        id: undefined,
+        size: "M",
+      });
     };
 
     return (
       <Dialog open={open} disableEscapeKeyDown fullWidth>
         <DialogTitle>Build your Pizza</DialogTitle>
         <DialogContent>
-          <PizzaAnimation extras={pizzaExtras} />
+          <PizzaAnimation extras={pizzaOnEdit.extras} />
           <FormControl fullWidth margin="normal">
             <InputLabel>Size</InputLabel>
             <Select
-              value={pizzaSize}
-              onChange={(e) => setPizzaSize(e.target.value)}
+              value={pizzaOnEdit.size}
+              onChange={(e) =>
+                setPizzaOnEdit((prev) => ({
+                  ...prev,
+                  size: e.target.value,
+                }))
+              }
             >
               {Object.keys(availablePizzaSizes).map((key) => (
                 <MenuItem value={key}>
@@ -96,13 +101,13 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
             </Select>
           </FormControl>
           <Grid container spacing={2}>
-            {Object.keys(pizzaExtras).map((key) => (
+            {Object.keys(pizzaOnEdit.extras).map((key) => (
               <Grid size={6} key={key}>
                 <FormControlLabel
                   key={key}
                   control={
                     <Checkbox
-                      checked={pizzaExtras[key as keyof Extras]}
+                      checked={pizzaOnEdit.extras[key as keyof Extras]}
                       onChange={handleCheckboxChange}
                       name={key}
                     />
@@ -115,11 +120,13 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleSave} variant="contained">Save</Button>
+          <Button onClick={handleSave} variant="contained">
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     );
   }
 );
 
-export default OrderPizzaDialog;
+export default OrderDialog;

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useReducer,
-  useContext,
-  useEffect,
-  type ReactNode,
-} from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 import type { Extras, UserOrderManagment } from "../types/pizzaTypes";
 
 type State = {
@@ -14,7 +8,7 @@ type State = {
 
 type Action =
   | { type: "ADD_ORDER"; payload: UserOrderManagment }
-  | { type: "APPROVE_ORDER"; payload: string }; // payload = order ID
+  | { type: "APPROVE_ORDER"; payload: string };
 
 type PizzaContextType = {
   state: State;
@@ -79,7 +73,6 @@ export const PizzaProvider: React.FC<{ children: React.ReactNode }> = ({
     getInitialState
   );
 
-  // Sync to localStorage on state change
   useEffect(() => {
     localStorage.setItem("pizza-state", JSON.stringify(state));
   }, [state]);

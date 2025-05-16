@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef } from "react";
+import { useState, useImperativeHandle, forwardRef } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -11,13 +11,14 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { usePizzaContext } from "../context/PizzaContext";
 import type { UserOrderManagment, Extras } from "../types/pizzaTypes";
+
 export type ViewOrderDialogRef = {
   open: () => void;
   close: () => void;
 };
 
 type ViewOrderDialogProps = {
-  orderInView: UserOrderManagment;
+  orderInView: UserOrderManagment ;
 };
 
 const ViewOrderDialog = forwardRef<ViewOrderDialogRef, ViewOrderDialogProps>(
