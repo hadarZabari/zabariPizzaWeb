@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useImperativeHandle,
-  forwardRef
-} from "react";
+import React, { useState, useImperativeHandle, forwardRef } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -18,14 +14,8 @@ import {
   Checkbox,
 } from "@mui/material";
 import PizzaAnimation from "./PizzaAnimation";
-import {
-  availablePizzaSizes,
-  defaultExtras,
-  type Extras,
-  type PizaSizes,
-  type PizzaDetails,
-} from "../../types/pizzaTypes";
-
+import type { Extras, PizaSizes, PizzaSettings } from "../../types/pizzaTypes";
+import { defaultExtras, availablePizzaSizes } from "../../constants/pizzaSetting";
 export type OrderDialogRef = {
   open: () => void;
   close: () => void;
@@ -33,21 +23,18 @@ export type OrderDialogRef = {
 
 type OrderDialogProps = {
   onSave: () => void;
-  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaDetails>>
-  pizzaOnEdit: PizzaDetails;
-  
+  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaSettings>>;
+  pizzaOnEdit: PizzaSettings;
 };
 
 const OrderDialog = forwardRef<OrderDialogRef, OrderDialogProps>(
   ({ onSave, pizzaOnEdit, setPizzaOnEdit }, ref) => {
-
     const [open, setOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
       open: () => setOpen(true),
       close: () => setOpen(false),
     }));
-
 
     const handleCheckboxChange = (
       event: React.ChangeEvent<HTMLInputElement>

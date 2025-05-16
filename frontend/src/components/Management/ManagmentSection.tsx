@@ -1,17 +1,18 @@
 import type React from "react";
 import { useRef, useState } from "react";
 import { Stack, Typography, Grid, Button } from "@mui/material";
-import type { OrderPizzaDialogRef } from "./CreateOrder/OrderDialog";
+import type { OrderDialogRef } from "../CreateOrder/OrderDialog";
 import { useTheme } from "@mui/material/styles";
-import { usePizzaContext } from "../context/PizzaContext";
+import { usePizzaContext } from "../../context/PizzaContext";
 import ViewOrderDialog from "./ViewOrderDialog";
-import type { UserOrderManagment } from "../types/pizzaTypes";
+import type { DoneUserOrder } from "../../types/pizzaTypes";
 
 const ManagmentSection: React.FC = () => {
   const mainTitle = "Managment Section";
   const theme = useTheme();
-  const [orderInView, setOrderInView] = useState<UserOrderManagment>()
-  const dialogRef = useRef<OrderPizzaDialogRef>(null);
+  const [orderInView, setOrderInView] = useState<DoneUserOrder | undefined>()
+
+  const dialogRef = useRef<OrderDialogRef>(null);
   const { state } = usePizzaContext();
   const handleOpen = () => {
     dialogRef.current?.open();
@@ -40,12 +41,12 @@ const ManagmentSection: React.FC = () => {
                 bgcolor={theme.palette.secondary.main}
                 container
               >
-                <Grid size={3}>
+                <Grid size={7}>
                   <Typography variant="body1">
-                    <strong>Client Name</strong> {name}
+                    <strong>Client Name:</strong> {name}
                   </Typography>
                 </Grid>
-                <Grid size={7}>
+                <Grid size={3}>
                   <Typography variant="body1">
                     <strong>Pizzas count: </strong> {pizzas.length}
                   </Typography>
@@ -63,7 +64,7 @@ const ManagmentSection: React.FC = () => {
           <Typography>No pending orders.</Typography>
         )}
       </Stack>
-     {orderInView &&  <ViewOrderDialog ref={dialogRef} orderInView={orderInView} />}
+     <ViewOrderDialog ref={dialogRef} orderInView={orderInView} />
     </Stack>
   );
 };

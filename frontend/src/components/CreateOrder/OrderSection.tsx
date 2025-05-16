@@ -2,16 +2,15 @@ import type React from "react";
 import { useRef, useState } from "react";
 import { Stack, Typography, TextField, Grid, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import type { PizzaDetails, UserOrder } from "../../types/pizzaTypes";
+import type { PizzaSettings, UserOrder } from "../../types/pizzaTypes";
 import type { OrderDialogRef } from "./OrderDialog";
 import { useTheme } from "@mui/material/styles";
 import OrderDialog from "./OrderDialog";
 import { v4 as uuidv4 } from "uuid";
 import { usePizzaContext } from "../../context/PizzaContext";
-import { defaultExtras } from "../../types/pizzaTypes";
 import OrderItems from "./OrderItems";
 import CreateOrderActions from "./CreateOrderActions";
-
+import { defaultExtras } from "../../constants/pizzaSetting";
 const OrderSection: React.FC = () => {
   const mainTitle = "Create Order";
   const theme = useTheme();
@@ -21,7 +20,7 @@ const OrderSection: React.FC = () => {
     name: "",
     pizzas: [],
   });
-  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaDetails>({
+  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaSettings>({
     extras: defaultExtras,
     id: undefined,
     size: "M",

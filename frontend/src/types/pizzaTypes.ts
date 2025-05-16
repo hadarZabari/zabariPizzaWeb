@@ -7,10 +7,9 @@ export type Extras = {
   pineapple: boolean;
 };
 
-
 export type PizaSizes = "S" | "M" | "L";
 
-export type PizzaDetails = {
+export type PizzaSettings = {
   size: PizaSizes;
   extras: Extras;
   id: string | undefined;
@@ -18,31 +17,14 @@ export type PizzaDetails = {
 
 export type UserOrder = {
   name: string;
-  pizzas: PizzaDetails[];
+  pizzas: PizzaSettings[];
 };
 
-export type UserOrderManagment = {
+export type DoneUserOrder = {
   name: string;
-  pizzas: PizzaDetails[];
+  pizzas: PizzaSettings[];
   id:string
 };
 
-export type PizzaContextState = {
-  pendingOrders: (UserOrder & { id: string })[];
-  approvedOrders: (UserOrder & { id: string })[];
-};
 
-export type PizzaAction =
-  | { type: "ADD_ORDER"; payload: UserOrder }
-  | { type: "APPROVE_ORDER"; payload: string };
 
-export const availablePizzaSizes = { S: "Small", M: "Medium", L: "Large" };
-
-export const defaultExtras: Extras = {
-  cheese: true,
-  olive: false,
-  mushrooms: false,
-  basil: false,
-  tomato: false,
-  pineapple: false,
-};

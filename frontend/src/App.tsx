@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home/Home";
 import OrderSection from "./components/CreateOrder/OrderSection";
-import ManagmentSection from "./components/ManagmentSection";
-import ROUTES from "./routes";
-import { PizzaProvider } from "./context/PizzaContext";
+import ManagmentSection from "./components/Management/ManagmentSection";
+import ROUTES from "./constants/routes";
+import { PizzaProvider } from "./context/PizzaProvider";
 
 const App: React.FC = () => {
   return (

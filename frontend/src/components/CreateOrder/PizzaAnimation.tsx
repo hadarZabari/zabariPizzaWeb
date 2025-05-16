@@ -1,13 +1,13 @@
 import type React from "react";
 import { motion } from "framer-motion";
-import BasePizza from "../assets/PizzaBase.png";
+import BasePizza from "../../assets/PizzaBase.png";
 import type { Extras } from "../../types/pizzaTypes";
-import Basil from "../assets/Basil.png";
-import Mushroom from "../assets/Mushroom.png";
-import Olive from "../assets/Olive.png";
-import Pineapple from "../assets/Pineapple.png";
-import Tomato from "../assets/Tomato.png";
-import BaseCheese from "../assets/BaseCheese.png";
+import Basil from "../../assets/Basil.png";
+import Mushroom from "../../assets/Mushroom.png";
+import Olive from "../../assets/Olive.png";
+import Pineapple from "../../assets/Pineapple.png";
+import Tomato from "../../assets/Tomato.png";
+import BaseCheese from "../../assets/BaseCheese.png";
 
 type ToppingName = keyof Extras;
 type PizzaAnimationProps = {

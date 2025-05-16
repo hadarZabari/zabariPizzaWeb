@@ -1,7 +1,7 @@
 import type React from "react";
 import "./Home.css";
 import pizzaImg from "../../assets/pizza.png";
-import ROUTES from "../../routes";
+import ROUTES from "../../constants/routes";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 

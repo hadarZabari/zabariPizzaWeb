@@ -1,11 +1,11 @@
 import type React from "react";
 import { Stack, Typography, Grid, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import type { PizzaDetails, Extras } from "../../types/pizzaTypes";
+import type { PizzaSettings, Extras } from "../../types/pizzaTypes";
 
 type OrderItemsProps = {
-  userPizzas: PizzaDetails[];
-  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaDetails>>;
+  userPizzas: PizzaSettings[];
+  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaSettings>>;
   handleOpen: () => void;
 };
 
