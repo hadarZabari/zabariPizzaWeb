@@ -29,9 +29,6 @@ const themeOptions: ThemeOptions = {
           "&.Mui-focusVisible": {
             outline: "none",
           },
-          "&:hover": {
-            backgroundColor: "rgba(211, 47, 47, 0.08)",
-          },
         },
       },
     },

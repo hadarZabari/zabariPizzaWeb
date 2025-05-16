@@ -14,8 +14,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import PizzaAnimation from "./PizzaAnimation";
-import { availablePizzaSizes, defaultExtras, type Extras } from "./types";
-import type { PizzaDetails } from "./OrderSection";
+import { availablePizzaSizes, defaultExtras, type Extras ,type PizaSizes, type PizzaDetails} from "../types/pizzaTypes";
 export type OrderPizzaDialogRef = {
   open: () => void;
   close: () => void;
@@ -24,7 +23,7 @@ export type OrderPizzaDialogRef = {
 type OrderPizzaDialogProps = {
     pizzaOnEdit: PizzaDetails | null,
   onSave: (
-    newSize: keyof typeof availablePizzaSizes,
+    newSize: PizaSizes,
     newExtras: Extras,
     id?: string
   ) => void;
@@ -34,7 +33,7 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
   ({ onSave, pizzaOnEdit }, ref) => {
     const [open, setOpen] = useState(false);
     const [pizzaSize, setPizzaSize] =
-      useState<keyof typeof availablePizzaSizes>("M");
+      useState<PizaSizes>("M");
     const [pizzaExtras, setPizzaExtras] = useState<Extras>(defaultExtras);
     const [idPizza, setIdPizza] = useState<string | undefined>(undefined)
     useImperativeHandle(ref, () => ({
@@ -91,7 +90,7 @@ const OrderPizzaDialog = forwardRef<OrderPizzaDialogRef, OrderPizzaDialogProps>(
             >
               {Object.keys(availablePizzaSizes).map((key) => (
                 <MenuItem value={key}>
-                  {availablePizzaSizes[key as keyof typeof availablePizzaSizes]}
+                  {availablePizzaSizes[key as PizaSizes]}
                 </MenuItem>
               ))}
             </Select>

@@ -1,7 +1,7 @@
 import type React from "react";
 import { motion } from "framer-motion";
 import BasePizza from "../assets/PizzaBase.png";
-import type { Extras } from "./types";
+import type { Extras } from "../types/PizzaTypes";
 import Basil from "../assets/Basil.png";
 import Mushroom from "../assets/Mushroom.png";
 import Olive from "../assets/Olive.png";
