@@ -18,7 +18,7 @@ export type ViewOrderDialogRef = {
 };
 
 type ViewOrderDialogProps = {
-  orderInView: DoneUserOrder | undefined;
+  orderInView: DoneUserOrder;
 };
 
 const ViewOrderDialog = forwardRef<ViewOrderDialogRef, ViewOrderDialogProps>(
@@ -31,8 +31,6 @@ const ViewOrderDialog = forwardRef<ViewOrderDialogRef, ViewOrderDialogProps>(
       open: () => setOpen(true),
       close: () => setOpen(false),
     }));
-
-    if (!orderInView) return null;
 
     const handleSave = () => {
       dispatch({ type: "APPROVE_ORDER", payload: orderInView.id });

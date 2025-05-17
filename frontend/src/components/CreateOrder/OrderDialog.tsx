@@ -14,8 +14,9 @@ import {
   Checkbox,
 } from "@mui/material";
 import PizzaAnimation from "./PizzaAnimation";
-import type { Extras, PizaSizes, PizzaSettings } from "../../types/pizzaTypes";
+import type { Extras, PizaSizes, PizzaDefinition } from "../../types/pizzaTypes";
 import { defaultExtras, availablePizzaSizes } from "../../constants/pizzaSetting";
+
 export type OrderDialogRef = {
   open: () => void;
   close: () => void;
@@ -23,8 +24,8 @@ export type OrderDialogRef = {
 
 type OrderDialogProps = {
   onSave: () => void;
-  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaSettings>>;
-  pizzaOnEdit: PizzaSettings;
+  setPizzaOnEdit: React.Dispatch<React.SetStateAction<PizzaDefinition>>;
+  pizzaOnEdit: PizzaDefinition;
 };
 
 const OrderDialog = forwardRef<OrderDialogRef, OrderDialogProps>(

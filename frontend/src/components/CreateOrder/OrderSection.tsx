@@ -2,9 +2,8 @@ import type React from "react";
 import { useRef, useState } from "react";
 import { Stack, Typography, TextField, Grid, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import type { PizzaSettings, UserOrder } from "../../types/pizzaTypes";
+import type { PizzaDefinition, UserOrder } from "../../types/pizzaTypes";
 import type { OrderDialogRef } from "./OrderDialog";
-import { useTheme } from "@mui/material/styles";
 import OrderDialog from "./OrderDialog";
 import { v4 as uuidv4 } from "uuid";
 import { usePizzaContext } from "../../context/PizzaContext";
@@ -13,14 +12,13 @@ import CreateOrderActions from "./CreateOrderActions";
 import { defaultExtras } from "../../constants/pizzaSetting";
 const OrderSection: React.FC = () => {
   const mainTitle = "Create Order";
-  const theme = useTheme();
   const { dispatch } = usePizzaContext();
   const dialogRef = useRef<OrderDialogRef>(null);
   const [userOrder, setUserOrder] = useState<UserOrder>({
     name: "",
     pizzas: [],
   });
-  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaSettings>({
+  const [pizzaOnEdit, setPizzaOnEdit] = useState<PizzaDefinition>({
     extras: defaultExtras,
     id: undefined,
     size: "M",
@@ -85,8 +83,8 @@ const OrderSection: React.FC = () => {
           <Typography borderBottom={1}>My Order: </Typography>
         </Grid>
         <Grid>
-          <IconButton onClick={handleOpen}>
-            <AddIcon sx={{ color: theme.palette.primary.main }} />
+          <IconButton color="primary" onClick={handleOpen}>
+            <AddIcon  />
           </IconButton>
         </Grid>
       </Grid>

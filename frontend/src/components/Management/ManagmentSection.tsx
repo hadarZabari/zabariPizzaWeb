@@ -10,10 +10,10 @@ import type { DoneUserOrder } from "../../types/pizzaTypes";
 const ManagmentSection: React.FC = () => {
   const mainTitle = "Managment Section";
   const theme = useTheme();
-  const [orderInView, setOrderInView] = useState<DoneUserOrder | undefined>()
-
+  const [orderInView, setOrderInView] = useState<DoneUserOrder>({name: '', id: '', pizzas:[]})
   const dialogRef = useRef<OrderDialogRef>(null);
   const { state } = usePizzaContext();
+  
   const handleOpen = () => {
     dialogRef.current?.open();
   };

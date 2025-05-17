@@ -9,7 +9,7 @@ export type Extras = {
 
 export type PizaSizes = "S" | "M" | "L";
 
-export type PizzaSettings = {
+export type PizzaDefinition = {
   size: PizaSizes;
   extras: Extras;
   id: string | undefined;
@@ -17,12 +17,12 @@ export type PizzaSettings = {
 
 export type UserOrder = {
   name: string;
-  pizzas: PizzaSettings[];
+  pizzas: PizzaDefinition[];
 };
 
 export type DoneUserOrder = {
   name: string;
-  pizzas: PizzaSettings[];
+  pizzas: PizzaDefinition[];
   id:string
 };
 
